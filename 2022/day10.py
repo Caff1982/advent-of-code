@@ -26,5 +26,4 @@ screen[sprites] = 1
 screen = screen.reshape(6, 40)
 # Shows "FBURHZCH"
 plt.imshow(screen, cmap='binary')
-plt.savefig('Day10_p2.png')
 plt.show()
