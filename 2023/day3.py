@@ -2,8 +2,10 @@
 
 SYMBOLS = "+$&/%=#*-@"
 
+
 def is_symbol(cell):
     return cell in SYMBOLS
+
 
 def is_valid_part(start, end, lines):
     # Check top row
