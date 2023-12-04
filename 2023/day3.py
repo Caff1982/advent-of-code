@@ -1,55 +1,5 @@
 
 
-# with open('inputs/input_day3.txt') as f:
-#     lines = f.read().splitlines()
-
-
-# def is_valid_part(start, end, lines):
-#     symbols = "+$&/%=#*-@"
-#     if start[0] > 0:
-#         # Check top row
-#         if any(c in lines[start[0]-1][max(0, start[1]-1):min(end[1]+2, len(lines[0]))] for c in symbols):
-#             return True
-#     if start[0] != len(lines)-1:
-#         # Check bottom row
-#         if any(c in lines[start[0]+1][max(0, start[1]-1):min(end[1]+2, len(lines[0]))] for c in symbols):
-#             return True
-#     if start[1] > 0:
-#         # Check left cell
-#         if lines[start[0]][start[1]-1] in symbols:
-#             return True
-#     if end[1] != len(lines[0])-1:
-#         # Check right cell
-#         if lines[start[0]][end[1]+1] in symbols:
-#             return True
-
-#     return False
-
-
-# total = 0
-# for i in range(len(lines)):
-#     start = None
-#     end = None
-#     for j in range(len(lines[0])):
-#         if lines[i][j].isdigit() and start is None:
-#                 start = (i, j)
-
-#         elif not lines[i][j].isdigit() and start is not None:
-#             if is_valid_part(start, (i, j-1), lines):
-#                 part_num = int(lines[i][start[1]:j])
-#                 total += part_num
-
-#             start = None
-
-#     if start is not None:
-#         if is_valid_part(start, (i, j), lines):
-#             part_num = int(lines[i][start[1]:j+1])
-#             total += part_num
-
-#         start = None
-
-# print(total)
-
 SYMBOLS = "+$&/%=#*-@"
 
 def is_symbol(cell):
@@ -95,35 +45,7 @@ for i in range(len(lines)):
 print(total)
 
 
-# # Part 2
-
-# directions = [(0, 1), (1, 0), (0, -1), (-1, 0),
-#               (1, 1), (1, -1), (-1, 1), (-1, -1)]
-# gears = set()
-# temp_num_str = ''
-# adjacent_cells = set()
-# numbers = []
-# total = 0
-# for i, line in enumerate(lines):
-#     for j, char in enumerate(line):
-#         if char.isdigit():
-#             temp_num_str += char
-#             for dx, dy in directions:
-#                 adjacent_cells.add((i+dx, j+dy))
-#         else:
-#             if temp_num_str:
-#                 numbers.append((int(temp_num_str), adjacent_cells))
-#                 temp_num_str = ''
-#                 adjacent_cells = set()
-#             if char == '*':
-#                 gears.add((i, j))
-
-# for gear in gears:
-#     adjacent_numbers = [number for number, cells in numbers if gear in cells]
-#     if len(adjacent_numbers) == 2:
-#         total += adjacent_numbers[0] * adjacent_numbers[1]
-
-# print(total)
+# Part 2
 
 DIRECTIONS = [(0, 1), (1, 0), (0, -1), (-1, 0),
               (1, 1), (1, -1), (-1, 1), (-1, -1)]
@@ -143,9 +65,6 @@ current_number_str = ''
 adjacent_cells = set()
 numbers = []
 total = 0
-with open('inputs/input_day3.txt') as f:
-    lines = f.read().splitlines()
-
 for i, line in enumerate(lines):
     for j, char in enumerate(line):
         current_number_str, adjacent_cells = add_digit(char, current_number_str, adjacent_cells, i, j)
