@@ -3,13 +3,6 @@ with open('inputs/input_day1.txt') as f:
     lines = f.read().splitlines()
 
 
-# lines = """3   4
-# 4   3
-# 2   5
-# 1   3
-# 3   9
-# 3   3""".splitlines()
-
 arr1, arr2 = zip(*(map(int, line.split()) for line in lines))
 
 arr1 = sorted(arr1)
