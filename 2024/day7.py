@@ -4,21 +4,32 @@ with open("inputs/input_day7.txt") as f:
     lines = f.read().splitlines()
 
 
-def is_valid(target, nums, part_two=False):
-    def recurse(remaining_nums, current_result):
+def is_valid(target, nums, part_two=False, memo=None):
+    if memo is None:
+        memo = {}
+
+    def recurse(remaining_nums, current_sum):
         if not remaining_nums:
-            return current_result == target
+            return current_sum == target
         
+        key = (tuple(remaining_nums), current_sum)
+        if key in memo:
+            return memo[key]
+
         next_num = remaining_nums[0]
         rest_nums = remaining_nums[1:]
 
-        if recurse(rest_nums, current_result + next_num):
+        if recurse(rest_nums, current_sum + next_num):
+            memo[key] = True
             return True
-        if recurse(rest_nums, current_result * next_num):
+        if recurse(rest_nums, current_sum * next_num):
+            memo[key] = True
             return True
-        if part_two and recurse(rest_nums, int(str(current_result)  + str(next_num))):
+        if part_two and recurse(rest_nums, int(str(current_sum) + str(next_num))):
+            memo[key] = True
             return True
 
+        memo[key] = False
         return False
 
     first_num = nums[0]
